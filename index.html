@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xinjie Li</title>
+  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+  <link rel="shortcut icon" type="image/x-icon" href="images/misc/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- Bulma Version 0.7.5-->
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css" />
+  <link href='css/style.css?_t=20200916' rel='stylesheet' type='text/css'>
+  <script defer src="font-awesome/js/brands.min.js"></script>
+  <script defer src="font-awesome/js/regular.min.js"></script>
+  <script defer src="font-awesome/js/fontawesome.min.js"></script>
+    <style>
+      .red {
+        color: rgb(238, 76, 44);
+        font-style: normal;
+      }
+      .blue {
+        color: rgb(238, 76, 44);
+        font-style: normal;
+      }
+       
+      #intro {
+       margin-top: 0em !important;
+      }
+      
+      .content h3 {
+       margin-bottom: 1em!important;
+       margin-top: 2em!important;
+      }
+
+      .content figure {
+       width: 90%;
+       display: flex;
+       align-items: center;
+       overflow: hidden;
+       margin-left: auto!important;
+       margin-right: auto!important;
+      }
+      
+      .columns:not(:last-child) {
+       margin-bottom: 1.75rem!important;
+      }
+
+      #sidebar {
+        width: 75%;
+      }
+
+      @media screen and (min-width: 769px), print {
+        .column.is-2_5, .column.is-2-tablet {
+          flex: none;
+          width: 20%;
+        }
+      }
+</style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-2_5">
+          <div class="sticky">
+            <figure class="image" style="width: 6rem; margin-top: 6px;">
+              <img src="images/misc/profile.png" style="width: 60%;">
+            </figure>
+            
+            <div class="content">
+              <h2 style="margin-top: 1em">Xinjie Li</h2>
+              <p>
+                <b>Penn State University</b><br/> 
+                State College<br/> 
+                Pennsylvania
+              </p>
+            </div>
+            <!-- social network icons -->
+            <div class="social">
+              <a href="https://scholar.google.com/citations?user=sh9uq8EAAAAJ&hl=en" target="_blank">
+                <span class="fab fa-google fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
+              </a>
+              <a href="https://www.linkedin.com/in/li-xinjie-08820a204/" target="_blank">
+                <span class="fab fa-linkedin fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
+              </a>
+              <a href="mailto:xql5497@psu.edu" target="_blank">
+                <span class="fa-regular fa-envelope fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
+              </a>
+            </div>
+
+
+            <div id="sidebar" class="menu sticky is-hidden-mobile">
+              <!-- <p class="menu-label"><b>Quick Links</b></p> -->
+              <ul class="menu-list">
+                <li><a href="#intro">About Me</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li>
+                  <a href="#publications">Publications</a>
+                  <ul>
+                    <li><a href="#video-understanding">Video Understanding</a></li>
+                    <li><a href="#image-generation">Image Generation</a></li>
+                    <li><a href="#ai4science">AI4Science</a></li>
+                    <li><a href="#others">Others</a></li>
+                  </ul>
+                </li>
+                <li><a href="#services">Services</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="column right-panel">
+          <div class="content">
+
+
+            <!--About Me-->
+            <h2 id="intro">About Me</h2>
+            <p>
+              I am a Ph.D. student in the <a href="https://www.eecs.psu.edu/" target="_blank">CSE Department</a> at 
+              <a href="https://www.psu.edu/" target="_blank">Pennsylvania State University-University Park</a> since the 2022 Fall, 
+              under the supervisor of <a href="https://averma8053.github.io/" target="_blank">Prof. Abhinav Verma</a>.
+              I received my Master's and Bachelor's Degrees from the University of Science and Technology Beijing in 2022 and 2019, respectively. 
+              Back then, my supervisor was <a href="https://scholar.google.com/citations?user=V3hiob0AAAAJ&hl=zh-CN&oi=ao" target="_blank">Prof. Xu-Cheng Yin</a>.  
+            </p>
+
+            <p>
+              I am interested in Computer Vision and AI for Science. 
+              My current work focuses on Human-centered Video Generation.
+              My previous research topics include Retrosynthesis, Video Understanding, and Metric Learning. 
+              I am also interested in Program Synthesis, Neuro-symbolic Learning and Reinforcement Learning.
+            </p>
+
+            <p>
+              Please refer to my <a href="Xinjie Li - CV - Homepage.pdf" target="_blank">resume</a> for more details.
+            </p>            
+            
+
+            <!--Experience-->
+            <h2 id="experience" style="margin-bottom: 25px;">Experience</h2>
+
+            <article class="columns">
+              <div class="column is-3">
+                <figure class="image" style="width: 7rem; margin-top: 6px;">
+                  <img src="images/misc/paii.jpg" class="img-logo" style="width: 70%;">
+                </figure>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b>Research Intern</b> | PAII Inc.<br>
+                    Topic: Co-speech Video Generation<br>
+                    Mentor: <a href="https://www.linkedin.com/in/ziyi-chen-4a68b169/" target="_blank">Dr. Ziyi Chen</a> and <a href="https://www.linkedin.com/in/peng-peter-chang-9b82a56/" target="_blank">Dr. Peng Chang</a><br>
+                    Time: May 2024 - Present
+                    </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="columns">
+              <div class="column is-3">
+                <figure class="image" style="width: 7rem; margin-top: 6px;">
+                  <img src="images/misc/snap.jpg" class="img-logo" style="width: 70%;">
+                </figure>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b>Research Intern</b> | Snap Inc.<br>
+                    Topic: ControlNet based Human Image Restoration<br>
+                    Mentor: <a href="https://jianwang-cmu.github.io/" target="_blank">Dr. Jian Wang</a><br>
+                    Time: Aug 2023 - March 2024
+                    </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="columns">
+              <div class="column is-3">
+                <figure class="image" style="width: 9rem; margin-top: 6px;">
+                  <img src="images/misc/meituan.png" class="img-logo" style="width: 90%;">
+                </figure>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b>Research Intern</b> | Meituan Inc.<br>
+                    Topic: Vision Transformer and Video Semantic Segmentation<br>
+                    Mentor: <a href="https://scholar.google.com/citations?user=jn21pUsAAAAJ/" target="_blank">XiangXiang Chu</a><br>
+                    Time: May 2021 - Aug 2021
+                    </p>
+                </div>
+              </div>
+            </article>
+
+            <!--Publications-->
+            <h2 id="publications">
+              Publications
+              <span style="font-size: 1rem;margin-left: 1rem;position: relative;bottom: .2rem;">
+              </span>
+            </h2>
+            
+
+            <h3 id="video-understanding">Video Understanding</h3> 
+
+            <!--List of publications-->
+            <article class="columns">
+              
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b>CI w/o TN: Context Injection without Task Name for Procedure Planning</b><br>
+                    <b>Xinjie Li</b><br>
+                    <i><b>Arxiv Preprint</b>, 2024</i><br>
+                    <a href="https://arxiv.org/abs/2402.15579" target="_blank">[Arxiv]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b>Repetitive Action Counting with Motion Feature Learning</b><br>
+                    <b>Xinjie Li</b>, Huijuan Xu<br>
+                    <i><b>WACV</b>, 2024</i><br>
+                    <a href="https://openaccess.thecvf.com/content/WACV2024/papers/Li_Repetitive_Action_Counting_With_Motion_Feature_Learning_WACV_2024_paper.pdf" target="_blank">[Paper]</a>
+                    <a href="https://openaccess.thecvf.com/content/WACV2024/supplemental/Li_Repetitive_Action_Counting_WACV_2024_supplemental.pdf" target="_blank">[Supp]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b>MEID: Mixture-of-Experts with Internal Distillation for Long-Tailed Video Recognition</b><br>
+                    <b>Xinjie Li</b>, Huijuan Xu<br>
+                    <i><b>AAAI Oral</b>, 2023</i><br>
+                    <a href="https://ojs.aaai.org/index.php/AAAI/article/view/25230" target="_blank">[Paper]</a>
+                    <a href="https://github.com/abcdvzz/MEID/blob/main/Supplementary%20Material/Supplementary%20Material.pdf" target="_blank">[Supp]</a>
+                    <a href="https://github.com/abcdvzz/MEID" target="_blank">[Code]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <h3 id="image-generation">Image Generation</h3> 
+
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b> DiffBody: Human Body Restoration by Imagining with Generative Diffusion Prior</b><br>
+                    Yiming Zhang, Zhe Wang, <b>Xinjie Li</b>, Yunchen Yuan, Chengsong Zhang, Xiao Sun, Zhihang Zhong, Jian Wang<br>
+                    <i><b>Arxiv Preprint</b>, 2024</i><br>
+                    <a href="https://arxiv.org/abs/2404.03642" target="_blank">[Arxiv]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+           
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b> SD-GAN: Semantic Decomposition for Face Image Synthesis with Discrete Attribute</b><br>
+                    Kangneng Zhou, Xiaobin Zhu, Daiheng Zhou, Kai Lee, <b>Xinjie Li</b>, Xu-Cheng Yin<br>
+                    <i><b>ACM MM</b>, 2022</i><br>
+                    <a href="https://dl.acm.org/doi/pdf/10.1145/3503161.3547791" target="_blank">[Paper]</a>
+                    <a href="https://arxiv.org/pdf/2207.05300.pdf" target="_blank">[Arxiv]</a>
+                    <a href="https://github.com/MontaEllis/SD-GAN" target="_blank">[Code]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <h3 id="ai4science">AI4Science</h3> 
+
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b> EllipBench: A Large-scale Benchmark for Machine-learning based Ellipsometry Modeling</b><br>
+                    Yiming Ma*, <b>Xinjie Li*</b>, Xin Sun, Zhiyong Wang, Lionel Z. Wang, Huijuan Xu<br>
+                    <i><b>Arxiv Preprint</b>, 2024</i><br>
+                    <a href="https://arxiv.org/abs/2407.17869" target="_blank">[Arxiv]</a>
+                    <a href="https://github.com/wellsssssss/Ellipbench" target="_blank">[Code]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <h3 id="others">Others</h3> 
+
+            <article class="columns">
+ 
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b> DANet: Dynamic Attention to Spoof Patterns for Face Anti-Spoofing</b><br>
+                    Chun-yu Sun, Song-Lu Chen, <b>Xinjie Li</b>, Feng Chen, Xu-Cheng Yin<br>
+                    <i><b>ICPR</b>, 2022</i><br>
+                    <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9956725" target="_blank">[Paper]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b> Semantic Bilinear Pooling for Fine-Grained Recognition</b><br>
+                    <b>Xinjie Li</b>, Chun Yang, Song-Lu Chen, Chao Zhu, Xu-Cheng Yin<br>
+                    <i><b>ICPR</b>, 2020</i><br>
+                    <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9412252" target="_blank">[Paper]</a>
+                    <a href="https://arxiv.org/pdf/1904.01893.pdf" target="_blank">[Arxiv]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="columns">
+
+              <div class="column">
+                <div class="content">
+                  <p>
+                    <b> Stereo CenterNet based 3D Object Detection for Autonomous Driving</b><br>
+                    Yuguang Shi, Yu Guo, Zhenqiang Mi, <b>Xinjie Li</b><br>
+                    <i><b>Neurocomputing</b></i><br>
+                    <a href="https://reader.elsevier.com/reader/sd/pii/S0925231221017264?token=2B2C2F3FF78091890FF5D33D1BC7F86F516B494FCE5FDEEFC1569F1828CC8927C214A5C406411641A1311978C682C9E6&originRegion=us-east-1&originCreation=20230513203918" target="_blank">[Paper]</a>
+                    <a href="https://arxiv.org/pdf/2103.11071.pdf" target="_blank">[Arxiv]</a>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <h2 id="services">Services</h2>
+            <ul>
+              <li>Conference Reviewer/Program Committee Member
+                <br>&emsp;IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) - 2023, 2024
+                <br>&emsp;European Conference on Computer Vision (ECCV) - 2024
+                <br>&emsp;AAAI Conference on Artificial Intelligence (AAAI) - 2023, 2024, 2025
+                <br>&emsp;ACM International Conference on Multimedia (ACM MM) - 2022, 2023, 2024
+                <br>&emsp;IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) - 2023
+                <br>&emsp;Annual Conference on Neural Information Processing Systems (NeurIPS) - 2024
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container">
+      <br><hr>
+      <div class="row" style="text-align: center">
+        Website design from <a href="https://github.com/zudi-lin/zudi-lin.github.io/" target="_blank">Zudi Lin</a><br>  
+      </div>
+    </footer>
+  </section>
+
+
+  <script>
+
+    var $hashList = $('.menu-list a'), offsetList, maxScrollHeight;
+
+    $('#sidebar').on('click', 'a', function(){
+      activate($(this))
+    });
+    
+    $(window).on('resize', debounce(calculateBoundary, 300));
+
+    $(document).on('scroll', debounce(judgeScroll, 300));
+
+    calculateBoundary();
+    judgeScroll();
+    
+    function  calculateBoundary() {
+      offsetList = $hashList.map(function(idx, ele){
+        return $(ele.hash).offset().top
+      });
+      maxScrollHeight = $(document).height() - $(window).height()
+    }
+    
+    function judgeScroll() {
+      var tps = $("html").scrollTop()
+              ? $("html").scrollTop()
+              : $("body").scrollTop(),
+              len = offsetList.length;
+      if(tps >= maxScrollHeight-10){
+        activate($hashList.eq(len-1));
+        return
+      }
+      for(var i=0; i<len; i++){
+       if(tps+50<offsetList[i]){
+          activate($hashList.eq(Math.max(0,i-1)));
+          return
+        }
+      }
+    }
+
+    function activate(ele){
+      $hashList.removeClass('is-active');
+      ele.addClass('is-active');
+    }
+
+    function debounce(fn, delay) {
+      var timeout = null;
+      return function () {
+        var args = arguments;
+        var context = this;
+        if (!timeout) {
+          timeout = setTimeout(function () {
+            timeout = 0;
+            return fn.apply(context, args);
+          }, delay);
+        }
+      };
+    }
+
+
+
+  </script>
+
+
+</body>
+
+</html>
