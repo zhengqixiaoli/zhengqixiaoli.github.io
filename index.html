@@ -1,537 +1,773 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xinjie Li</title>
-  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+  <meta name="description" content="Xinjie Li — Applied Scientist at Amazon Prime Video. Research in MLLM post-training, agents, and LLM-as-a-judge.">
   <link rel="shortcut icon" type="image/x-icon" href="images/misc/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <!-- Bulma Version 0.7.5-->
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css" />
-  <link href='css/style.css?_t=20200916' rel='stylesheet' type='text/css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
   <script defer src="font-awesome/js/brands.min.js"></script>
   <script defer src="font-awesome/js/regular.min.js"></script>
   <script defer src="font-awesome/js/fontawesome.min.js"></script>
-    <style>
-      .red {
-        color: rgb(238, 76, 44);
-        font-style: normal;
-      }
-      .blue {
-        color: rgb(238, 76, 44);
-        font-style: normal;
-      }
-       
-      #intro {
-       margin-top: 0em !important;
-      }
-      
-      .content h3 {
-       margin-bottom: 1em!important;
-       margin-top: 2em!important;
-      }
 
-      .content figure {
-       width: 90%;
-       display: flex;
-       align-items: center;
-       overflow: hidden;
-       margin-left: auto!important;
-       margin-right: auto!important;
-      }
-      
-      .columns:not(:last-child) {
-       margin-bottom: 1.75rem!important;
-      }
+  <style>
+    :root {
+      --bg: #fbfbf9;
+      --surface: #ffffff;
+      --surface-2: #f4f4f0;
+      --text: #1f2328;
+      --text-soft: #55606a;
+      --text-mute: #8a939d;
+      --border: #e7e6e0;
+      --accent: #ee4c2c;
+      --accent-soft: rgba(238, 76, 44, 0.10);
+      --shadow: 0 1px 2px rgba(20, 20, 20, 0.04), 0 8px 24px rgba(20, 20, 20, 0.05);
+      --shadow-hover: 0 4px 10px rgba(20, 20, 20, 0.07), 0 16px 40px rgba(20, 20, 20, 0.09);
+      --radius: 16px;
+      --maxw: 1080px;
+    }
 
-      #sidebar {
-        width: 75%;
-      }
+    html[data-theme="dark"] {
+      --bg: #0f1115;
+      --surface: #171a21;
+      --surface-2: #1e222b;
+      --text: #e8eaed;
+      --text-soft: #b3bac2;
+      --text-mute: #7b838d;
+      --border: #262b34;
+      --accent: #ff6a4d;
+      --accent-soft: rgba(255, 106, 77, 0.14);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.35);
+      --shadow-hover: 0 6px 14px rgba(0, 0, 0, 0.5), 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
 
-      @media screen and (min-width: 769px), print {
-        .column.is-2_5, .column.is-2-tablet {
-          flex: none;
-          width: 20%;
-        }
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color .15s ease, opacity .15s ease;
+    }
+    a:hover { opacity: .78; }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar {
+      position: sticky;
+      top: 32px;
+      padding: 40px 0 32px;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--surface);
+      box-shadow: var(--shadow);
+      background: var(--surface-2);
+    }
+
+    .sidebar h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin: 20px 0 4px;
+      letter-spacing: -.01em;
+    }
+
+    .affil {
+      color: var(--text-soft);
+      font-size: .92rem;
+      line-height: 1.5;
+      margin: 0 0 18px;
+    }
+    .affil strong { color: var(--text); font-weight: 600; }
+
+    .socials { display: flex; gap: 10px; margin-bottom: 26px; }
+    .socials a {
+      width: 40px; height: 40px;
+      display: grid; place-items: center;
+      border-radius: 11px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-soft);
+      box-shadow: var(--shadow);
+      font-size: 1.05rem;
+      transition: transform .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-3px);
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+      opacity: 1;
+    }
+
+    /* WeChat QR popover */
+    .wechat {
+      position: relative;
+      width: 40px; height: 40px;
+      display: grid; place-items: center;
+      border-radius: 11px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-soft);
+      box-shadow: var(--shadow);
+      font-size: 1.05rem;
+      cursor: pointer;
+      outline: none;
+      transition: transform .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .wechat:hover, .wechat:focus {
+      transform: translateY(-3px);
+      color: #07c160;
+      border-color: #07c160;
+      box-shadow: var(--shadow-hover);
+    }
+    .wechat-pop {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(6px) scale(.96);
+      transform-origin: bottom center;
+      width: 180px;
+      padding: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 60;
+    }
+    .wechat:hover .wechat-pop, .wechat:focus .wechat-pop {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    .wechat-pop img { width: 100%; display: block; border-radius: 8px; }
+    .wechat-pop em {
+      display: block;
+      margin-top: 8px;
+      font-size: .72rem;
+      font-style: normal;
+      color: var(--text-mute);
+      text-align: center;
+    }
+    .wechat-pop::after {
+      content: "";
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-top-color: var(--surface);
+    }
+
+    .nav { border-left: 2px solid var(--border); padding-left: 0; }
+    .nav a {
+      display: block;
+      color: var(--text-soft);
+      font-size: .9rem;
+      font-weight: 500;
+      padding: 6px 0 6px 16px;
+      margin-left: -2px;
+      border-left: 2px solid transparent;
+      transition: color .15s ease, border-color .15s ease;
+    }
+    .nav a:hover { color: var(--text); opacity: 1; }
+    .nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .nav .sub a { font-size: .82rem; padding-left: 32px; color: var(--text-mute); }
+    .nav .sub a.active { color: var(--accent); }
+
+    /* ---------- Main ---------- */
+    main { padding: 40px 0 80px; min-width: 0; }
+
+    section { margin-bottom: 56px; scroll-margin-top: 24px; }
+
+    h2.title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      margin: 0 0 22px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h2.title .badge {
+      font-family: 'Inter', sans-serif;
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: .02em;
+    }
+
+    h3.sub {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--text-mute);
+      margin: 30px 0 14px;
+    }
+
+    p { margin: 0 0 14px; color: var(--text-soft); }
+    #about p { font-size: 1.02rem; color: var(--text); }
+    #about strong { font-weight: 600; }
+
+    .highlight {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--accent-soft);
+      border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 20px;
+      font-size: .95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .highlight i { color: var(--accent); margin-top: 3px; }
+
+    /* Experience cards */
+    .exp {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .exp:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .exp-logo {
+      flex: 0 0 84px;
+      width: 84px; height: 84px;
+      display: grid; place-items: center;
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .exp-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .exp-body { min-width: 0; }
+    .exp-body .role { font-weight: 600; color: var(--text); font-size: 1.02rem; }
+    .exp-body .role .org { color: var(--accent); }
+    .exp-body .meta { font-size: .9rem; color: var(--text-soft); margin: 3px 0; }
+    .exp-body .time { font-size: .82rem; color: var(--text-mute); font-weight: 500; }
+
+    /* Publication cards */
+    .pub {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid transparent;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, border-left-color .18s ease;
+    }
+    .pub:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-left-color: var(--accent);
+    }
+    .pub .ptitle { font-weight: 600; color: var(--text); line-height: 1.45; }
+    .pub .authors { font-size: .92rem; color: var(--text-soft); margin: 4px 0; }
+    .pub .authors .me { color: var(--text); font-weight: 700; }
+    .pub .venue { font-size: .88rem; color: var(--text-mute); font-style: italic; margin-bottom: 8px; }
+    .pub .venue b { color: var(--accent); font-style: normal; font-weight: 600; }
+    .pub .links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pub .links a {
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 3px 11px;
+      border-radius: 7px;
+      background: var(--surface-2);
+      color: var(--text-soft);
+      border: 1px solid var(--border);
+      transition: all .15s ease;
+    }
+    .pub .links a:hover { background: var(--accent); color: #fff; border-color: var(--accent); opacity: 1; }
+
+    /* Lists */
+    ul.clean { list-style: none; padding: 0; margin: 0; }
+    ul.clean li {
+      padding: 9px 0 9px 26px;
+      position: relative;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--border);
+    }
+    ul.clean li:last-child { border-bottom: none; }
+    ul.clean li::before {
+      content: "";
+      position: absolute;
+      left: 6px; top: 18px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    ul.clean li b, ul.clean li strong { color: var(--text); font-weight: 600; }
+
+    .svc-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .svc-item:last-child { border-bottom: none; }
+    .svc-item .svc-head { font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .svc-tags span {
+      font-size: .8rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-soft);
+      padding: 3px 10px;
+      border-radius: 7px;
+    }
+
+    /* Theme toggle */
+    .toggle {
+      position: fixed;
+      top: 20px; right: 20px;
+      z-index: 50;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-soft);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-size: 1.05rem;
+      display: grid; place-items: center;
+      transition: transform .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+    .toggle:hover { transform: translateY(-2px); color: var(--accent); box-shadow: var(--shadow-hover); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 40px;
+      text-align: center;
+      color: var(--text-mute);
+      font-size: .85rem;
+    }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .wrap { grid-template-columns: 1fr; gap: 0; }
+      .sidebar {
+        position: static;
+        text-align: center;
+        padding: 48px 0 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-</style>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+      .affil { text-align: center; }
+      .nav { display: none; }
+      main { padding: 20px 0 60px; }
+      .exp { flex-direction: column; text-align: center; }
+      .exp-logo { flex-basis: auto; }
+    }
+  </style>
 </head>
 
-
 <body>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-2_5">
-          <div class="sticky">
-            <figure class="image" style="width: 6rem; margin-top: 6px;">
-              <img src="images/misc/profile.png" style="width: 60%;">
-            </figure>
-            
-            <div class="content">
-              <h2 style="margin-top: 1em">Xinjie Li</h2>
-              <p>
-                <b>Penn State University</b><br/> 
-                State College<br/> 
-                Pennsylvania
-              </p>
-            </div>
-            <!-- social network icons -->
-            <div class="social">
-              <a href="https://scholar.google.com/citations?user=sh9uq8EAAAAJ&hl=en" target="_blank">
-                <span class="fab fa-google fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
-              <a href="https://www.linkedin.com/in/xinjie-li-08820a204/" target="_blank">
-                <span class="fab fa-linkedin fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
-              <a href="mailto:xql5497@psu.edu" target="_blank">
-                <span class="fa-regular fa-envelope fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
-            </div>
+  <button class="toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-regular fa-moon"></i></button>
 
+  <div class="wrap">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <img class="avatar" src="images/misc/profile.png" alt="Xinjie Li">
+      <h1>Xinjie Li</h1>
+      <p class="affil">
+        <strong>Amazon Prime Video</strong><br>
+        Seattle, Washington
+      </p>
+      <div class="socials">
+        <a href="https://scholar.google.com/citations?user=sh9uq8EAAAAJ&hl=en" target="_blank" aria-label="Google Scholar"><i class="fa-brands fa-google"></i></a>
+        <a href="https://www.linkedin.com/in/xinjie-li-08820a204/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:abcdvzz@hotmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+        <a href="Resume___New_Template.pdf" target="_blank" aria-label="CV"><i class="fa-regular fa-file-lines"></i></a>
+        <span class="wechat" tabindex="0" aria-label="WeChat">
+          <i class="fa-brands fa-weixin"></i>
+          <span class="wechat-pop">
+            <img src="images/misc/wechat.jpeg" alt="WeChat QR code">
+            <em>Scan to add me on WeChat</em>
+          </span>
+        </span>
+      </div>
 
-            <div id="sidebar" class="menu sticky is-hidden-mobile">
-              <!-- <p class="menu-label"><b>Quick Links</b></p> -->
-              <ul class="menu-list">
-                <li><a href="#intro">About Me</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li>
-                  <a href="#publications">Publications</a>
-                  <ul>
-                    <li><a href="#video-understanding">Video Understanding</a></li>
-                    <li><a href="#video/image-generation">Video/Image Generation</a></li>
-                    <li><a href="#ai4science">AI4Science</a></li>
-                    <li><a href="#others">Others</a></li>
-                  </ul>
-                </li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#teaching">Teaching</a></li>
-              </ul>
-            </div>
-          </div>
-
-
-
+      <nav class="nav" id="nav">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <div class="sub">
+          <a href="#video-generation">Video/Image Generation</a>
+          <a href="#video-understanding">Video Understanding</a>
+          <a href="#ai4science">AI4Science</a>
+          <a href="#others">Others</a>
         </div>
-        <div class="column right-panel">
-          <div class="content">
+        <a href="#experience">Internships</a>
+        <a href="#services">Services</a>
+        <a href="#teaching">Teaching</a>
+      </nav>
+    </aside>
 
+    <!-- ============ MAIN ============ -->
+    <main>
+      <!-- About -->
+      <section id="about" class="reveal">
+        <h2 class="title">About Me</h2>
+        <p>
+          I am an <strong>Applied Scientist</strong> at Amazon Prime Video.
+          I earned my Ph.D. in Computer Science from
+          <a href="https://www.psu.edu/" target="_blank">Penn State University</a> (2022–2026), advised by <a href="https://averma8053.github.io/" target="_blank">Prof. Abhinav Verma</a>,
+          and my M.S. (2022) and B.S. (2019) from USTB, advised by <a href="https://scholar.google.com/citations?user=V3hiob0AAAAJ&hl=zh-CN&oi=ao" target="_blank">Prof. Xu-Cheng Yin</a>.
+        </p>
+        <p>
+          My current research centers on <strong>Causal World Modeling</strong>, <strong>MLLM Agent Post-Training & Self-Evolution</strong>, also <strong>Judge</strong>.
+        </p>
+        <p>
+          After nearly a decade in computer vision, I have grown most curious about a different question: how agents can model
+          <strong>open-ended, creative tasks</strong>, capturing <strong>human taste</strong> and, ultimately, modeling <strong>how society itself evolves</strong>.
+          I believe the next frontier is not perceiving the world more accurately, but reasoning about what people find valuable and worth creating.
+        </p>
+      </section>
 
-            <!--About Me-->
-            <h2 id="intro">About Me</h2>
-            <p>
-              I am a Ph.D. student in the <a href="https://www.eecs.psu.edu/" target="_blank">CSE Department</a> at 
-              <a href="https://www.psu.edu/" target="_blank">Pennsylvania State University-University Park</a> since the 2022 Fall, 
-              under the supervision of <a href="https://averma8053.github.io/" target="_blank">Prof. Abhinav Verma</a>.
-              I received my Master's and Bachelor's Degrees from the University of Science and Technology Beijing in 2022 and 2019, respectively. 
-              Back then, my supervisor was <a href="https://scholar.google.com/citations?user=V3hiob0AAAAJ&hl=zh-CN&oi=ao" target="_blank">Prof. Xu-Cheng Yin</a>.  
-            </p>
+      <!-- Publications -->
+      <section id="publications" class="reveal">
+        <h2 class="title">Publications</h2>
 
-            <p>
-              <!-- I am interested in Computer Vision and AI for Science.  -->
-              My recent research focuses on Multimodal Video Understanding (MLLM) and Generation (Diffusion), Reinforcement Learning.
-              <!-- My previous research topics include Retrosynthesis, Video Understanding, and Metric Learning. 
-              I am also interested in Program Synthesis, Neuro-symbolic Learning, and Reinforcement Learning. -->
-            </p>
+        <h3 class="sub" id="video-generation">Video/Image Generation</h3>
 
-            <p>
-              Please refer to my <a href="Xinjie Li - CV - Homepage.pdf" target="_blank">resume</a> for more details.
-            </p>
-
-            <p>
-              <b>Seeking Full-time or Internship (with potential conversion to Full-time) opportunities in Multimodal Video AI; 
-              Earliest start: Jan 2026.</b>
-            </p>
-            
-
-            <!--Experience-->
-            <h2 id="experience" style="margin-bottom: 25px;">Experience</h2>
-
-            <article class="columns" style="margin-bottom: 7px !important;">
-              <div class="column is-3">
-                <figure class="image" style="width: 7rem; margin-top: 6px;">
-                  <img src="images/misc/amazon.png" class="img-logo" style="width: 70%;">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    Applied Scientist Intern | <b>Amazon Prime Video.</b><br>
-                    Topic: Video Understanding and Generation<br>
-                    Mentor: <a href="https://www.zhiminc.website/" target="_blank">Dr. Zhimin Chen</a>, <a href="https://www.linkedin.com/in/zhenyu-liao-535576176/" target="_blank">Dr. Zhenyu Liao</a>, <a href="https://florianschiffers.com/" target="_blank">Dr. Florian Schiffers</a> and <a href="https://sites.ecse.rpi.edu/~cvrl/zhaor/" target="_blank">Dr. Rui Zhao</a><br>
-                    Time: May 2025 - Present
-                    </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 7px !important;">
-              <div class="column is-3">
-                <figure class="image" style="width: 7rem; margin-top: 6px;">
-                  <img src="images/misc/paii.jpg" class="img-logo" style="width: 70%;">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    Research Scientist Intern | <b>PAII Inc.</b><br>
-                    Topic: Co-speech Gesture Video Generation<br>
-                    Mentor: <a href="https://scholar.google.com/citations?user=4yMS3J8AAAAJ&hl=en" target="_blank">Dr. Ziyi Chen</a> and <a href="https://scholar.google.com/citations?user=feoBnmkAAAAJ&hl=en" target="_blank">Dr. Peng Chang</a><br>
-                    Time: May 2024 - March 2025
-                    </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 7px !important;">
-              <div class="column is-3">
-                <figure class="image" style="width: 7rem; margin-top: 6px;">
-                  <img src="images/misc/snap.jpg" class="img-logo" style="width: 70%;">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    Research Intern | <b>Snap Research.</b><br>
-                    Topic: ControlNet-based Human Image Restoration<br>
-                    Mentor: <a href="https://jianwang-cmu.github.io/" target="_blank">Dr. Jian Wang</a><br>
-                    Time: Aug 2023 - March 2024
-                    </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 7px !important;">
-              <div class="column is-3">
-                <figure class="image" style="width: 9rem; margin-top: 6px">
-                  <img src="images/misc/meituan.png" class="img-logo" style="width: 90%;">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    MLE Intern | <b>Meituan Inc.</b><br>
-                    Topic: Vision Transformer and Video Semantic Segmentation<br>
-                    Mentor: <a href="https://cxxgtxy.github.io/" target="_blank">XiangXiang Chu</a><br>
-                    Time: May 2021 - Aug 2021
-                    </p>
-                </div>
-              </div>
-            </article>
-
-            <!--Publications-->
-            <h2 id="publications">
-              Publications
-              <span style="font-size: 1rem;margin-left: 1rem;position: relative;bottom: .2rem;">
-              </span>
-            </h2>
-            
-
-            <h3 id="video-understanding">Video Understanding</h3> 
-
-            <!--List of publications-->
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>CI w/o TN: Context Injection without Task Name for Procedure Planning</b><br>
-                    <b>Xinjie Li</b><br>
-                    <i><b>Arxiv Preprint</b>, 2024</i><br>
-                    <a href="https://arxiv.org/abs/2402.15579" target="_blank">[Arxiv]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-            
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Repetitive Action Counting with Motion Feature Learning</b><br>
-                    <b>Xinjie Li</b>, Huijuan Xu<br>
-                    <i><b>WACV</b>, 2024</i><br>
-                    <a href="https://openaccess.thecvf.com/content/WACV2024/papers/Li_Repetitive_Action_Counting_With_Motion_Feature_Learning_WACV_2024_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="https://openaccess.thecvf.com/content/WACV2024/supplemental/Li_Repetitive_Action_Counting_WACV_2024_supplemental.pdf" target="_blank">[Supp]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>MEID: Mixture-of-Experts with Internal Distillation for Long-Tailed Video Recognition</b><br>
-                    <b>Xinjie Li</b>, Huijuan Xu<br>
-                    <i><b>AAAI Oral</b>, 2023</i><br>
-                    <a href="https://ojs.aaai.org/index.php/AAAI/article/view/25230" target="_blank">[Paper]</a>
-                    <a href="https://github.com/abcdvzz/MEID/blob/main/Supplementary%20Material/Supplementary%20Material.pdf" target="_blank">[Supp]</a>
-                    <a href="https://github.com/abcdvzz/MEID" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <h3 id="video/image-generation">Video/Image Generation</h3> 
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> Co-Speech Gesture Video Generation with Implicit Motion-Audio Entanglement</b><br>
-                    <b>Xinjie Li</b>, Ziyi Chen, Xinlu Yu, Iek-Heng Chu, Peng Chang, Jing Xiao<br>
-                    <i><b>CVPR</b>, 2025</i><br>
-                    <a href="https://imae25.github.io/" target="_blank">[Project]</a>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_Co-Speech_Gesture_Video_Generation_with_Implicit_Motion-Audio_Entanglement_CVPR_2025_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2025/supplemental/Li_Co-Speech_Gesture_Video_CVPR_2025_supplemental.pdf" target="_blank">[Supp]</a>
-                    <a href="https://github.com/abcdvzz/imae-open-source/" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> Are Conditional Latent Diffusion Models Effective for Image Restoration?</b><br>
-                    Yunchen Yuan, Junyuan Xiao, <b>Xinjie Li</b><br>
-                    <i><b>Arxiv Preprint</b>, 2024</i><br>
-                    <a href="https://arxiv.org/abs/2412.09324" target="_blank">[Arxiv]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> DiffBody: Human Body Restoration by Imagining with Generative Diffusion Prior</b><br>
-                    Yiming Zhang, Lionel Z. WANG, Sizhuo Ma, <b>Xinjie Li</b>, Jian Ren, Zhihang Zhong, Jian Wang<br>
-                    <i><b>ICCP</b>, 2025</i><br>
-                    <a href="https://www.computer.org/csdl/proceedings-article/iccp/2025/11143829/29JEdoAPKi4" target="_blank">[Paper]</a>
-                    <a href="https://jianwang-cmu.github.io/25DiffBody/DiffBody_Human_Body_Image_R.pdf" target="_blank">[PDF]</a>
-                    <a href="https://arxiv.org/abs/2404.03642" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/yimingz1218/DiffBody" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-           
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> SD-GAN: Semantic Decomposition for Face Image Synthesis with Discrete Attribute</b><br>
-                    Kangneng Zhou, Xiaobin Zhu, Daiheng Zhou, Kai Lee, <b>Xinjie Li</b>, Xu-Cheng Yin<br>
-                    <i><b>ACM MM</b>, 2022</i><br>
-                    <a href="https://dl.acm.org/doi/pdf/10.1145/3503161.3547791" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/pdf/2207.05300.pdf" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/MontaEllis/SD-GAN" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <h3 id="ai4science">AI4Science</h3> 
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> RetroMoE: A Mixture-of-Experts Latent Translation Framework for Single-step Retrosynthesis</b><br>
-                    <b>Xinjie Li</b>, Abhinav Verma<br>
-                    <i><b>IJCAI</b>, 2025</i><br>
-                    <a href="https://www.ijcai.org/proceedings/2025/0835.pdf" target="_blank">[Paper]</a>
-                    <!-- <a href="https://arxiv.org/abs/2504.04647" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/womale/LTDD/tree/master" target="_blank">[Code]</a> -->
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> Sub-Clustering for Class Distance Recalculation in Long-Tailed Drug Discovery</b><br>
-                    Yujia Su*, <b>Xinjie Li*</b>, Lionel Z. Wang<br>
-                    <i><b>Arxiv Preprint</b>, 2025</i><br>
-                    <a href="https://arxiv.org/abs/2504.04647" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/womale/LTDD/tree/master" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> EllipBench: A Large-scale Benchmark for Machine-learning based Ellipsometry Modeling</b><br>
-                    Yiming Ma*, <b>Xinjie Li*</b>, Xin Sun, Zhiyong Wang, Lionel Z. Wang<br>
-                    <i><b>Arxiv Preprint</b>, 2024</i><br>
-                    <a href="https://arxiv.org/abs/2407.17869" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/wellsssssss/Ellipbench" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <h3 id="others">Others</h3> 
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> DANet: Dynamic Attention to Spoof Patterns for Face Anti-Spoofing</b><br>
-                    Chun-Yu Sun, Song-Lu Chen, <b>Xinjie Li</b>, Feng Chen, Xu-Cheng Yin<br>
-                    <i><b>ICPR</b>, 2022</i><br>
-                    <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9956725" target="_blank">[Paper]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> Semantic Bilinear Pooling for Fine-Grained Recognition</b><br>
-                    <b>Xinjie Li</b>, Chun Yang, Song-Lu Chen, Chao Zhu, Xu-Cheng Yin<br>
-                    <i><b>ICPR</b>, 2020</i><br>
-                    <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9412252" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/pdf/1904.01893.pdf" target="_blank">[Arxiv]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns" style="margin-bottom: 5px !important;">
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b> Stereo CenterNet based 3D Object Detection for Autonomous Driving</b><br>
-                    Yuguang Shi, Yu Guo, Zhenqiang Mi, <b>Xinjie Li</b><br>
-                    <i><b>Neurocomputing</b></i><br>
-                    <a href="https://reader.elsevier.com/reader/sd/pii/S0925231221017264?token=2B2C2F3FF78091890FF5D33D1BC7F86F516B494FCE5FDEEFC1569F1828CC8927C214A5C406411641A1311978C682C9E6&originRegion=us-east-1&originCreation=20230513203918" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/pdf/2103.11071.pdf" target="_blank">[Arxiv]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <h2 id="services">Services</h2>
-            <ul>
-              <li>Conference Reviewer/Program Committee Member
-                <br>&emsp;International Joint Conference on Artificial Intelligence (IJCAI) - 2025
-                <br>&emsp;IEEE/CVF International Conference on Computer Vision (ICCV) - 2025
-                <br>&emsp;International Conference on Machine Learning (ICML) - 2025
-                <br>&emsp;IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) - 2023, 2024, 2025
-                <br>&emsp;International Conference on Learning Representations (ICLR) - 2025
-                <br>&emsp;AAAI Conference on Artificial Intelligence (AAAI) - 2023, 2024, 2025, 2026
-                <br>&emsp;Annual Conference on Neural Information Processing Systems (NeurIPS) - 2024, 2025
-                <br>&emsp;European Conference on Computer Vision (ECCV) - 2024
-                <br>&emsp;ACM International Conference on Multimedia (ACM MM) - 2022, 2023, 2024
-                <br>&emsp;IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) - 2023
-            </ul>
-
-            <h2 id="teaching">Teaching</h2>
-            <ul>
-              <li>CMPEN/EE 454 Fundamentals of Computer Vision, Fall 2025;
-              <li>CMPSC/Math 455 Introduction to Numerical Analysis I, Spring 2025;
-              <li>CMPEN/EE 454 Fundamentals of Computer Vision, Fall 2024;
-              <li>CMPSC 448 Machine Learning and Algorithmic AI, Spring 2024;
-              <li>CMPSC 131  Programming and Computation I: Fundamentals (Python), Fall 2023;
-            </ul>
+        <div class="pub">
+          <div class="ptitle">What Happens Next? Next Scene Prediction with a Unified Video Model</div>
+          <div class="authors"><span class="me">Xinjie Li</span>, Zhimin Chen, Rui Zhao, Florian Schiffers, Zhenyu Liao, Vimal Bhat</div>
+          <div class="venue"><b>CVPRW Oral</b>, 2026</div>
+          <div class="links">
+            <a href="https://nextsceneprediction.github.io/" target="_blank">Project</a>
+            <a href="https://openaccess.thecvf.com/content/CVPR2026W/HiGen/papers/Li_What_Happens_Next_Next_Scene_Prediction_with_a_Unified_Video_CVPRW_2026_paper.pdf" target="_blank">Paper</a>
+            <a href="https://arxiv.org/abs/2512.13015" target="_blank">Arxiv</a>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Footer -->
-    <footer class="container">
-      <br><hr>
-      <div class="row" style="text-align: center">
-        Website design from <a href="https://github.com/zudi-lin/zudi-lin.github.io/" target="_blank">Zudi Lin</a><br>  
-      </div>
-    </footer>
-  </section>
+        <div class="pub">
+          <div class="ptitle">Co-Speech Gesture Video Generation with Implicit Motion-Audio Entanglement</div>
+          <div class="authors"><span class="me">Xinjie Li</span>, Ziyi Chen, Xinlu Yu, Iek-Heng Chu, Peng Chang, Jing Xiao</div>
+          <div class="venue"><b>CVPR</b>, 2025</div>
+          <div class="links">
+            <a href="https://imae25.github.io/" target="_blank">Project</a>
+            <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_Co-Speech_Gesture_Video_Generation_with_Implicit_Motion-Audio_Entanglement_CVPR_2025_paper.pdf" target="_blank">Paper</a>
+            <a href="https://openaccess.thecvf.com/content/CVPR2025/supplemental/Li_Co-Speech_Gesture_Video_CVPR_2025_supplemental.pdf" target="_blank">Supp</a>
+            <a href="https://github.com/abcdvzz/imae-open-source/" target="_blank">Code</a>
+          </div>
+        </div>
 
+        <div class="pub">
+          <div class="ptitle">Are Conditional Latent Diffusion Models Effective for Image Restoration?</div>
+          <div class="authors">Yunchen Yuan, Junyuan Xiao, <span class="me">Xinjie Li</span></div>
+          <div class="venue"><b>Arxiv Preprint</b>, 2024</div>
+          <div class="links"><a href="https://arxiv.org/abs/2412.09324" target="_blank">Arxiv</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">DiffBody: Human Body Restoration by Imagining with Generative Diffusion Prior</div>
+          <div class="authors">Yiming Zhang, Lionel Z. WANG, Sizhuo Ma, <span class="me">Xinjie Li</span>, Jian Ren, Zhihang Zhong, Jian Wang</div>
+          <div class="venue"><b>ICCP</b>, 2025</div>
+          <div class="links">
+            <a href="https://www.computer.org/csdl/proceedings-article/iccp/2025/11143829/29JEdoAPKi4" target="_blank">Paper</a>
+            <a href="https://jianwang-cmu.github.io/25DiffBody/DiffBody_Human_Body_Image_R.pdf" target="_blank">PDF</a>
+            <a href="https://arxiv.org/abs/2404.03642" target="_blank">Arxiv</a>
+            <a href="https://github.com/yimingz1218/DiffBody" target="_blank">Code</a>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">SD-GAN: Semantic Decomposition for Face Image Synthesis with Discrete Attribute</div>
+          <div class="authors">Kangneng Zhou, Xiaobin Zhu, Daiheng Zhou, Kai Lee, <span class="me">Xinjie Li</span>, Xu-Cheng Yin</div>
+          <div class="venue"><b>ACM MM</b>, 2022</div>
+          <div class="links">
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3503161.3547791" target="_blank">Paper</a>
+            <a href="https://arxiv.org/pdf/2207.05300.pdf" target="_blank">Arxiv</a>
+            <a href="https://github.com/MontaEllis/SD-GAN" target="_blank">Code</a>
+          </div>
+        </div>
+
+        <h3 class="sub" id="video-understanding">Video Understanding</h3>
+
+        <div class="pub">
+          <div class="ptitle">CI w/o TN: Context Injection without Task Name for Procedure Planning</div>
+          <div class="authors"><span class="me">Xinjie Li</span></div>
+          <div class="venue"><b>Arxiv Preprint</b>, 2024</div>
+          <div class="links"><a href="https://arxiv.org/abs/2402.15579" target="_blank">Arxiv</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">Repetitive Action Counting with Motion Feature Learning</div>
+          <div class="authors"><span class="me">Xinjie Li</span>, Huijuan Xu</div>
+          <div class="venue"><b>WACV</b>, 2024</div>
+          <div class="links">
+            <a href="https://openaccess.thecvf.com/content/WACV2024/papers/Li_Repetitive_Action_Counting_With_Motion_Feature_Learning_WACV_2024_paper.pdf" target="_blank">Paper</a>
+            <a href="https://openaccess.thecvf.com/content/WACV2024/supplemental/Li_Repetitive_Action_Counting_WACV_2024_supplemental.pdf" target="_blank">Supp</a>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">MEID: Mixture-of-Experts with Internal Distillation for Long-Tailed Video Recognition</div>
+          <div class="authors"><span class="me">Xinjie Li</span>, Huijuan Xu</div>
+          <div class="venue"><b>AAAI Oral</b>, 2023</div>
+          <div class="links">
+            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/25230" target="_blank">Paper</a>
+            <a href="https://github.com/abcdvzz/MEID/blob/main/Supplementary%20Material/Supplementary%20Material.pdf" target="_blank">Supp</a>
+            <a href="https://github.com/abcdvzz/MEID" target="_blank">Code</a>
+          </div>
+        </div>
+
+        <h3 class="sub" id="ai4science">AI4Science</h3>
+
+        <div class="pub">
+          <div class="ptitle">RetroMoE: A Mixture-of-Experts Latent Translation Framework for Single-step Retrosynthesis</div>
+          <div class="authors"><span class="me">Xinjie Li</span>, Abhinav Verma</div>
+          <div class="venue"><b>IJCAI</b>, 2025</div>
+          <div class="links"><a href="https://www.ijcai.org/proceedings/2025/0835.pdf" target="_blank">Paper</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">Sub-Clustering for Class Distance Recalculation in Long-Tailed Drug Discovery</div>
+          <div class="authors">Yujia Su*, <span class="me">Xinjie Li*</span>, Lionel Z. Wang</div>
+          <div class="venue"><b>Arxiv Preprint</b>, 2025</div>
+          <div class="links">
+            <a href="https://arxiv.org/abs/2504.04647" target="_blank">Arxiv</a>
+            <a href="https://github.com/womale/LTDD/tree/master" target="_blank">Code</a>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">Modeling Inverse Ellipsometry Problem via Flow Matching with a Large-Scale Dataset</div>
+          <div class="authors">Yiming Ma*, Jianzhi Teng*, <span class="me">Xinjie Li*</span>, Xin Sun, Zhiyong Wang, Yuzhou Song, Lionel Z. Wang, Bin Chen</div>
+          <div class="venue"><b>Arxiv Preprint</b>, 2024</div>
+          <div class="links">
+            <a href="https://arxiv.org/abs/2407.17869" target="_blank">Arxiv</a>
+            <a href="https://github.com/wellsssssss/Ellipbench" target="_blank">Code</a>
+          </div>
+        </div>
+
+        <h3 class="sub" id="others">Others</h3>
+
+        <div class="pub">
+          <div class="ptitle">DANet: Dynamic Attention to Spoof Patterns for Face Anti-Spoofing</div>
+          <div class="authors">Chun-Yu Sun, Song-Lu Chen, <span class="me">Xinjie Li</span>, Feng Chen, Xu-Cheng Yin</div>
+          <div class="venue"><b>ICPR</b>, 2022</div>
+          <div class="links"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9956725" target="_blank">Paper</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">Semantic Bilinear Pooling for Fine-Grained Recognition</div>
+          <div class="authors"><span class="me">Xinjie Li</span>, Chun Yang, Song-Lu Chen, Chao Zhu, Xu-Cheng Yin</div>
+          <div class="venue"><b>ICPR</b>, 2020</div>
+          <div class="links">
+            <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9412252" target="_blank">Paper</a>
+            <a href="https://arxiv.org/pdf/1904.01893.pdf" target="_blank">Arxiv</a>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="ptitle">Stereo CenterNet based 3D Object Detection for Autonomous Driving</div>
+          <div class="authors">Yuguang Shi, Yu Guo, Zhenqiang Mi, <span class="me">Xinjie Li</span></div>
+          <div class="venue"><b>Neurocomputing</b></div>
+          <div class="links">
+            <a href="https://reader.elsevier.com/reader/sd/pii/S0925231221017264?token=2B2C2F3FF78091890FF5D33D1BC7F86F516B494FCE5FDEEFC1569F1828CC8927C214A5C406411641A1311978C682C9E6&originRegion=us-east-1&originCreation=20230513203918" target="_blank">Paper</a>
+            <a href="https://arxiv.org/pdf/2103.11071.pdf" target="_blank">Arxiv</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Internships -->
+      <section id="experience" class="reveal">
+        <h2 class="title">Internships</h2>
+
+        <div class="exp">
+          <div class="exp-body">
+            <div class="role">Applied Scientist Intern · <span class="org">Amazon Prime Video</span></div>
+            <div class="meta">Unified Video Understanding &amp; Generation Model — Large-Scale Pretraining, SFT, RL</div>
+            <div class="meta">Output: One paper accepted at CVPRW 2026</div>
+            <div class="meta">Mentors: <a href="https://www.zhiminc.website/" target="_blank">Dr. Zhimin Chen</a>, <a href="https://www.linkedin.com/in/zhenyu-liao-535576176/" target="_blank">Dr. Zhenyu Liao</a>, <a href="https://florianschiffers.com/" target="_blank">Dr. Florian Schiffers</a>, <a href="https://sites.ecse.rpi.edu/~cvrl/zhaor/" target="_blank">Dr. Rui Zhao</a></div>
+            <div class="time">Seattle, WA · May 2025 – Jan 2026</div>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-body">
+            <div class="role">Research Scientist Intern · <span class="org">PAII Inc.</span></div>
+            <div class="meta">Co-speech Gesture Video Generation</div>
+            <div class="meta">Output: One paper accepted at CVPR 2025, one under review at ECCV 2026</div>
+            <div class="meta">Mentors: <a href="https://scholar.google.com/citations?user=4yMS3J8AAAAJ&hl=en" target="_blank">Dr. Ziyi Chen</a>, <a href="https://scholar.google.com/citations?user=feoBnmkAAAAJ&hl=en" target="_blank">Dr. Peng Chang</a></div>
+            <div class="time">Palo Alto, CA · May 2024 – Mar 2025</div>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-body">
+            <div class="role">Research Intern · <span class="org">Snap Research</span></div>
+            <div class="meta">ControlNet-based Human Image Restoration</div>
+            <div class="meta">Mentor: <a href="https://jianwang-cmu.github.io/" target="_blank">Dr. Jian Wang</a></div>
+            <div class="time">Aug 2023 – Mar 2024</div>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-body">
+            <div class="role">MLE Intern · <span class="org">Meituan Inc.</span></div>
+            <div class="meta">Vision Transformer and Video Semantic Segmentation</div>
+            <div class="meta">Mentor: <a href="https://cxxgtxy.github.io/" target="_blank">XiangXiang Chu</a></div>
+            <div class="time">Beijing, China · May 2021 – Aug 2021</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services" class="reveal">
+        <h2 class="title">Services</h2>
+        <div class="svc-item">
+          <div class="svc-head">Conference Reviewer / Program Committee Member</div>
+          <div class="svc-tags">
+            <span>NeurIPS 2024–2026</span>
+            <span>BMVC 2026</span>
+            <span>ECCV 2024, 2026</span>
+            <span>ACL ARR 2026</span>
+            <span>CVPR 2023–2026</span>
+            <span>ICLR 2025, 2026</span>
+            <span>AAAI 2023–2026</span>
+            <span>ICCV 2025</span>
+            <span>ICML 2025</span>
+            <span>IJCAI 2025</span>
+            <span>ACM MM 2022–2024</span>
+            <span>WACV 2023</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaching -->
+      <section id="teaching" class="reveal">
+        <h2 class="title">Teaching</h2>
+        <ul class="clean">
+          <li><b>CMPSC/Math 455</b> Introduction to Numerical Analysis I · Spring 2026 &amp; 2025</li>
+          <li><b>CMPEN/EE 454</b> Fundamentals of Computer Vision · Fall 2025 &amp; 2024</li>
+          <li><b>CMPSC 448</b> Machine Learning and Algorithmic AI · Spring 2024</li>
+          <li><b>CMPSC 131</b> Programming and Computation I: Fundamentals (Python) · Fall 2023</li>
+        </ul>
+      </section>
+
+
+      <footer>
+        © <span id="year"></span> Xinjie Li
+      </footer>
+    </main>
+  </div>
 
   <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    var $hashList = $('.menu-list a'), offsetList, maxScrollHeight;
+    // Theme toggle
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('themeToggle');
+      var icon = btn.querySelector('i');
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      apply(theme);
 
-    $('#sidebar').on('click', 'a', function(){
-      activate($(this))
-    });
-    
-    $(window).on('resize', debounce(calculateBoundary, 300));
-
-    $(document).on('scroll', debounce(judgeScroll, 300));
-
-    calculateBoundary();
-    judgeScroll();
-    
-    function  calculateBoundary() {
-      offsetList = $hashList.map(function(idx, ele){
-        return $(ele.hash).offset().top
+      btn.addEventListener('click', function () {
+        theme = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+        apply(theme);
+        localStorage.setItem('theme', theme);
       });
-      maxScrollHeight = $(document).height() - $(window).height()
-    }
-    
-    function judgeScroll() {
-      var tps = $("html").scrollTop()
-              ? $("html").scrollTop()
-              : $("body").scrollTop(),
-              len = offsetList.length;
-      if(tps >= maxScrollHeight-10){
-        activate($hashList.eq(len-1));
-        return
+
+      function apply(t) {
+        root.setAttribute('data-theme', t);
+        icon.className = t === 'dark' ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
       }
-      for(var i=0; i<len; i++){
-       if(tps+50<offsetList[i]){
-          activate($hashList.eq(Math.max(0,i-1)));
-          return
-        }
-      }
-    }
+    })();
 
-    function activate(ele){
-      $hashList.removeClass('is-active');
-      ele.addClass('is-active');
-    }
+    // Scroll-spy nav
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+      var map = {};
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (el) map[id] = a;
+      });
+      var targets = Object.keys(map).map(function (id) { return document.getElementById(id); });
 
-    function debounce(fn, delay) {
-      var timeout = null;
-      return function () {
-        var args = arguments;
-        var context = this;
-        if (!timeout) {
-          timeout = setTimeout(function () {
-            timeout = 0;
-            return fn.apply(context, args);
-          }, delay);
-        }
-      };
-    }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            links.forEach(function (a) { a.classList.remove('active'); });
+            var a = map[e.target.id];
+            if (a) a.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
 
+      targets.forEach(function (t) { observer.observe(t); });
+    })();
 
-
+    // Reveal on scroll
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.08 });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
   </script>
-
-
 </body>
 
 </html>
-
-
-
-
-
